@@ -1,9 +1,6 @@
 import sys
 
 class Buffer:
-    data = []
-    sum = 0
-
     def __init__(self, size = 3) -> None:
         self.data = [0] * size
         self.size = size

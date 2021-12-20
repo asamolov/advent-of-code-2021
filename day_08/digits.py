@@ -28,7 +28,6 @@ def decoder(coded: List):
     one = set()
     four = set()
     seven = set()
-    eight = set()
 
     not_decoded = set()
 
@@ -44,7 +43,6 @@ def decoder(coded: List):
             four = coded_set
             decoded[coded_set] = 4
         elif len(coded_set) == 7:      # 8
-            eight = coded_set
             decoded[coded_set] = 8
         else:
             not_decoded.add(coded_set)
@@ -53,22 +51,18 @@ def decoder(coded: List):
     b_d = four - seven # segments b & d, in 4 but not in 7
 
     # with b_d: 5, 6, 9 len(9, 6) == 6, len(5) == 5
-    five = set()
     with_b_d = [x for x in not_decoded if x.issuperset(b_d)]
     for d in with_b_d:
         if len(d) == 5:
-            five = d
-            not_decoded.remove(five)
-            decoded[five] = 5
+            not_decoded.remove(d)
+            decoded[d] = 5
         else:
             if d.issuperset(one):
-                nine = d
-                not_decoded.remove(nine)
-                decoded[nine] = 9
+                not_decoded.remove(d)
+                decoded[d] = 9
             else:
-                six = d
-                not_decoded.remove(six)
-                decoded[six] = 6
+                not_decoded.remove(d)
+                decoded[d] = 6
 
     # 7 is not fully in 2
     for d in not_decoded:

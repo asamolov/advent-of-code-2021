@@ -44,6 +44,7 @@ if __name__ == "__main__":
             input = f.read().splitlines()
 
     shape = (len(input[0]), len(input))
+    total_size = len(input[0]) * len(input)
 
     arr = []
     for idx, line in enumerate(input):
@@ -61,8 +62,9 @@ if __name__ == "__main__":
     ax.imshow(np.array(arr)) 
     
     # iteration
-
-    for i in range(1, 101):
+    i = 0
+    while True:
+        i += 1
         print(f'Step {i}')
 
         flashed = set()
@@ -92,10 +94,15 @@ if __name__ == "__main__":
         
         title = f'step# {i} total flashed: {total_flashes}'
         print(title)
-        print(arr)
         ax.set_title(title)
         ax.imshow(np.array(arr)) 
-        plt.pause(0.2)
+        if len(flashed) == total_size:
+            print(f'All flashed! Step# {i}')
+            break
+#        if i == 100:
+#            print(f'step# {i} total flashed: {total_flashes}')
+
+        plt.pause(0.1)
 
     plt.show()
     #    ani = animation.ArtistAnimation(fig, ims, interval=50, blit=True,
